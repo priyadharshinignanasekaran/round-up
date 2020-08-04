@@ -31,6 +31,15 @@ public class TransactionFeed {
         private String counterPartySubEntitySubIdentifier;
         private String reference;
         private String country;
+
+        public String getSource() {
+            return source;
+        }
+
+        public String getSpendingCategory() {
+            return spendingCategory;
+        }
+
         private String spendingCategory;
         private Boolean hasAttachment;
 

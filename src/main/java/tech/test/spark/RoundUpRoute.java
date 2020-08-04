@@ -39,17 +39,14 @@ public class RoundUpRoute implements Route {
     private final StarlingClient starlingClient;
     private final Gson gson;
     private final ErrorHandler errorHandler;
-    private final Validator validator;
 
     public RoundUpRoute(
             final StarlingClient starlingClient,
             final Gson gson,
-            final ErrorHandler errorHandler,
-            final Validator validator) {
+            final ErrorHandler errorHandler) {
         this.starlingClient = starlingClient;
         this.gson = gson;
         this.errorHandler = errorHandler;
-        this.validator = validator;
     }
 
     @Override
@@ -58,7 +55,7 @@ public class RoundUpRoute implements Route {
         final String minTransactionTimestamp = request.queryParams("minTransactionTimestamp");
         final String maxTransactionTimestamp = request.queryParams("maxTransactionTimestamp");
         try {
-            validator.validate(request);
+            Validator.validate(request);
             final SavingGoalRequest savingGoalRequest = gson.fromJson(request.body(), RoundUpRequest.class).getSavingsGoal();
 
             final Account account = getGBPAccount().orElseThrow(() -> new AccountUnavailableException("Customer has no GBP account"));

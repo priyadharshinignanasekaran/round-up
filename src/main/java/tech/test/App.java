@@ -7,7 +7,6 @@ import spark.Spark;
 import tech.test.client.StarlingClient;
 import tech.test.error.handling.ErrorHandler;
 import tech.test.spark.RoundUpRoute;
-import tech.test.validation.Validator;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -35,8 +34,7 @@ public class App {
         final Gson gson = create();
         final StarlingClient client = new StarlingClient(openApiUrl, token, gson);
         final ErrorHandler errorHandler = new ErrorHandler(gson);
-        final Validator validator = new Validator(errorHandler);
-        new App(serverPort, client).start(gson, errorHandler, validator);
+        new App(serverPort, client).start(gson, errorHandler);
     }
 
     private static Properties envProperties() throws IOException {
@@ -45,12 +43,12 @@ public class App {
         return properties;
     }
 
-    void start(final Gson gson, final ErrorHandler errorHandler, final Validator validator) {
+    void start(final Gson gson, final ErrorHandler errorHandler) {
         LOGGER.info("Initialise Routes");
         Spark.port(serverPort);
         Spark.get("/ping", (req, resp) -> "pong");
         before((request, response) -> response.type("application/json"));
-        Spark.put(RoundUpRoute.PATH, new RoundUpRoute(client, gson, errorHandler, validator));
+        Spark.put(RoundUpRoute.PATH, new RoundUpRoute(client, gson, errorHandler));
 
     }
 }

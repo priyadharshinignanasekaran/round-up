@@ -27,16 +27,15 @@ class RoundUpRouteTest extends Specification {
     def starlingClient = Mock(StarlingClient)
     def gson = GsonFactory.create()
     def errorHandler = new ErrorHandler(gson)
-    def validator = new Validator(errorHandler)
 
-    def roundUpRoute = new RoundUpRoute(starlingClient, gson, errorHandler, validator)
+    def roundUpRoute = new RoundUpRoute(starlingClient, gson, errorHandler)
 
     def 'returns response with http BAD_REQUEST(400) status when request contains an invalid query paramters'() {
         given:
         request.body() >> INVALID_JSON
         request.queryParams("minTransactionTimestamp") >> "2020-08-01T00:00:000Z"
         request.queryParams("maxTransactionTimestamp") >> "2020-08-02T00:00:000Z"
-        validator.validate(_) >> false
+        Validator.validate(_) >> false
         when:
         roundUpRoute.handle(request, response)
 

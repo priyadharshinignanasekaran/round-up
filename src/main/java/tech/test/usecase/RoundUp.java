@@ -15,7 +15,8 @@ public class RoundUp {
 
     public static BigDecimal calculate(final List<TransactionFeed.Transaction> transactions) {
         return transactions.stream()
-                .filter(transaction -> transaction.getDirection().equals(OUT.getValue()))
+                .filter(transaction -> (transaction.getDirection().equals(OUT.getValue())))
+                .filter(outTransactions -> !(outTransactions.getSource().equals("INTERNAL_TRANSFER") && outTransactions.getSpendingCategory().equals("SAVING")))
                 .map(transaction -> convert(transaction.getAmount().getMinorUnits()))
                 .reduce(ZERO, BigDecimal::add);
     }

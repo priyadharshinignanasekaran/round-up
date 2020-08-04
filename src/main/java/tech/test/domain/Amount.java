@@ -5,7 +5,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.math.BigDecimal;
 import java.util.Currency;
-import java.util.Objects;
 
 public class Amount {
     private final Currency currency;
