@@ -1,0 +1,11 @@
+{
+  "savingsGoal": {
+    "name": "Trip to Paris",
+    "currency": "GBP",
+    "target": {
+      "currency": "GBP",
+      "minorUnits": 123456
+    },
+    "base64EncodedPhoto": "string"
+  }
+}

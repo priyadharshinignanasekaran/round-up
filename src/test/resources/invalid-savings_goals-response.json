@@ -1,0 +1,9 @@
+{
+  "savingsGoalUid": "77887788-7788-7788-7788-778877887788",
+  "success": false,
+  "errors": [
+    {
+      "message": "Something about the validation error"
+    }
+  ]
+}
