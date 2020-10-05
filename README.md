@@ -49,22 +49,6 @@ Sample request body -
          }
        }```
 
-Assumptions - 
-
-Assumption 1:
-From the API documentation it was clear that the customer can have more than one accounts (one for each currency type)
-    * Ive assumed that I can only create saving goal for GBP account
-    
-Reason:
-    * The problem statement given for the tech task mentioned about `rounding up to the nearest POUND`
-    * If I were to create a saving goal with different target currency, then when depositing into the saving goal the 
-    rounded up amount might have to be converted to the currency value that the account supports based on daily rate. 
-    So I've assumed I can create saving goals only for GBP Accounts
-
-Assumption 2:
-    * calculate roundup value only with 'OUT' transactions, assuming the customer wants to save every time he spends 
-    some money.
-
 Flow -
 
 get list of customer Accounts 
